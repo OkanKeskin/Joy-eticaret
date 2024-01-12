@@ -95,7 +95,7 @@
                   <div class="header_box">
                      <div class="login_menu">
                         <ul>
-                           <li><a href="#">
+                           <li><a href="{% url 'cart' %}">
                               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                               <span class="padding_10">Cart</span></a>
                            </li>
@@ -119,6 +119,7 @@
          </div>
          <!-- header section end -->
          <!-- banner section start -->
+         
          <div class="banner_section layout_padding">
             <div class="container">
                <div id="my_slider" class="carousel slide" data-ride="carousel">
@@ -170,7 +171,7 @@
                                  <p class="price_text">Price  <span style="color: #262626;">${{urun.price}}</span></p>
                                  <div class="tshirt_img"><img src="../static/images/{{urun.imageUrl}}"></div>
                                  <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">Add Cart</a></div>
+                                    <div class="buy_bt"><a href="cartAdd?id={{urun.id}}">Add Cart</a></div>
                                     <div class="seemore_bt"><a href="#">See More</a></div>
                                  </div>
                               </div>
@@ -200,7 +201,7 @@
                                  <p class="price_text">Price  <span style="color: #262626;">${{urun.price}}</span></p>
                                  <div class="tshirt_img"><img src="../static/images/{{urun.imageUrl}}"></div>
                                  <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">Add Cart</a></div>
+                                    <div class="buy_bt"><a href="cartAdd?id={{urun.id}}">Add Cart</a></div>
                                     <div class="seemore_bt"><a href="#">See More</a></div>
                                  </div>
                               </div>
@@ -230,7 +231,7 @@
                                  <p class="price_text">Price  <span style="color: #262626;">${{urun.price}}</span></p>
                                  <div class="tshirt_img"><img src="../static/images/{{urun.imageUrl}}"></div>
                                  <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">Add Cart</a></div>
+                                    <div class="buy_bt"><a href="cartAdd?id={{urun.id}}">Add Cart</a></div>
                                     <div class="seemore_bt"><a href="#">See More</a></div>
                                  </div>
                               </div>
@@ -260,7 +261,7 @@
                                  <p class="price_text">Price  <span style="color: #262626;">${{urun.price}}</span></p>
                                  <div class="tshirt_img"><img src="../static/images/{{urun.imageUrl}}"></div>
                                  <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">Add Cart</a></div>
+                                    <div class="buy_bt"><a href="cartAdd?id={{urun.id}}">Add Cart</a></div>
                                     <div class="seemore_bt"><a href="#">See More</a></div>
                                  </div>
                               </div>
@@ -290,7 +291,7 @@
                                  <p class="price_text">Price  <span style="color: #262626;">${{urun.price}}</span></p>
                                  <div class="tshirt_img"><img src="../static/images/{{urun.imageUrl}}"></div>
                                  <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">Add Cart</a></div>
+                                    <div class="buy_bt"><a href="cartAdd?id={{urun.id}}">Add Cart</a></div>
                                     <div class="seemore_bt"><a href="#">See More</a></div>
                                  </div>
                               </div>

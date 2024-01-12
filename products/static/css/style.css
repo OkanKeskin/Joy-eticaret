@@ -1,4 +1,4 @@
---------------------------------------------------------------------- File Name: style.css ---------------------------------------------------------------------*/
+
 /*--------------------------------------------------------------------- import Files ---------------------------------------------------------------------*/
 
 @import url(animate.min.css);
@@ -215,6 +215,15 @@ button {
     width: 100%;
     float: left;
     background-image: url(../images/banner-bg.png);
+    height: auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.banner_bg_mains {
+    width: 100%;
+    float: left;
+    background : orange;
     height: auto;
     background-size: 100%;
     background-repeat: no-repeat;

@@ -1,6 +1,6 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
-from .models import Category,Product,User
+from django.shortcuts import get_object_or_404, redirect, render
+from .models import Cart, Category,Product,User
 
 def home(request):
     if request.session.get('giris') == True:
@@ -120,6 +120,28 @@ def kayit(request):
         user.save()
     return redirect('home')
 
+def cart(request):
+    list = []
+    if request.session.get('giris') == True:
+        if request.session.get('cart') != None:
+            for i in request.session.get('cart'):
+                list.append(Product.objects.get(id=i))
+        data = {
+            "giris" : True,
+            "user_name" : request.session.get('user_name'), # "user_name" : "Ahmet
+            "kategoriler" : Category.objects.all(),
+        }
+        data["list"] = list
+    else:
+        data = {
+            "giris" : False,
+            "kategoriler" : Category.objects.all(),
+        }
+        data["list"] = list
+    return render(request, 'cart.html', data)
+
+    
+
 def giris(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -136,3 +158,31 @@ def logout(request):
     request.session['giris'] = False
     request.session['user_name'] = ""
     return redirect('home')
+
+def cartAdd(request):
+    id = request.GET.get('id')
+    if request.session.get('giris') == True:
+        if request.session.get('cart') == None:
+            request.session['cart'] = []
+        request.session['cart'].append(id)
+        request.session.modified = True
+        return redirect('cart')
+    else:
+        messages.error(request, 'Lütfen giriş yapınız!')
+    return redirect('cart')
+
+
+def cart_add(request, id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=id)
+    cart.add(product=product,
+             quantity=1,
+             override_quantity=False)
+    return redirect('home')
+
+def cart_detail(request):
+    cart = Cart(request)
+    context = {
+        'cart': cart
+    }
+    return render(request, 'cart.html', context=context)
