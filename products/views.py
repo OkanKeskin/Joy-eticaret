@@ -33,28 +33,58 @@ def login(request):
 
 def category_detail(request, id):
     query = request.GET.get('order')
-    if(query):
-        if(query == "asc"):
+    if request.session.get('giris') == True:
+        if(query):
+            if(query == "asc"):
+                data = {
+                    "giris" : True,
+                    "user_name" : request.session.get('user_name'), # "user_name" : "Ahmet
+                    "id": id,
+                    "kategoriler": Category.objects.all(),
+                    "kategori_name" : Category.objects.get(id=id).name,
+                    "urunler": Product.objects.filter(category_id=id).all().order_by('price'),
+                }
+            else:
+                data = {
+                    "giris" : True,
+                    "user_name" : request.session.get('user_name'), # "user_name" : "Ahmet
+                    "id": id,
+                    "kategoriler": Category.objects.all(),
+                    "kategori_name" : Category.objects.get(id=id).name,
+                    "urunler": Product.objects.filter(category_id=id).all().order_by('-price'),
+                }
+        else:
             data = {
+                "giris" : True,
+                "user_name" : request.session.get('user_name'), # "user_name" : "Ahmet
                 "id": id,
                 "kategoriler": Category.objects.all(),
                 "kategori_name" : Category.objects.get(id=id).name,
-                "urunler": Product.objects.filter(category_id=id).all().order_by('price'),
+                "urunler": Product.objects.filter(category_id=id).all(),
             }
+    else:
+        if(query):
+            if(query == "asc"):
+                data = {
+                    "id": id,
+                    "kategoriler": Category.objects.all(),
+                    "kategori_name" : Category.objects.get(id=id).name,
+                    "urunler": Product.objects.filter(category_id=id).all().order_by('price'),
+                }
+            else:
+                data = {
+                    "id": id,
+                    "kategoriler": Category.objects.all(),
+                    "kategori_name" : Category.objects.get(id=id).name,
+                    "urunler": Product.objects.filter(category_id=id).all().order_by('-price'),
+                }
         else:
             data = {
                 "id": id,
                 "kategoriler": Category.objects.all(),
                 "kategori_name" : Category.objects.get(id=id).name,
-                "urunler": Product.objects.filter(category_id=id).all().order_by('-price'),
+                "urunler": Product.objects.filter(category_id=id).all(),
             }
-    else:
-        data = {
-            "id": id,
-            "kategoriler": Category.objects.all(),
-            "kategori_name" : Category.objects.get(id=id).name,
-            "urunler": Product.objects.filter(category_id=id).all(),
-        }
     return render(request, 'category_detail.html', data)
 
 def product_search(request):
@@ -64,11 +94,20 @@ def product_search(request):
     if query:
         results = Product.objects.filter(name__icontains=query).all()
 
-    context = {
-        'query': query,
-        'results': results,
-        'kategoriler': Category.objects.all(),
-    }
+    if request.session.get('giris') == True:
+        context = {
+            'giris' : True,
+            'user_name' : request.session.get('user_name'), # "user_name" : "Ahmet
+            'query': query,
+            'results': results,
+            'kategoriler': Category.objects.all(),
+        }
+    else:
+        context = {
+            'query': query,
+            'results': results,
+            'kategoriler': Category.objects.all(),
+        }
 
     return render(request, 'productSearch.html', context)
 
