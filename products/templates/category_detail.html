@@ -147,12 +147,21 @@
       </div>
       <!-- banner bg main end -->
       <!-- section start -->
+      
       <div class="fashion_section">
          <div id="main_slider" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                <div class="carousel-item active">
                   <div class="container">
                      <h1 class="fashion_taital">{{kategori_name}}</h1>
+                     <div class="dropdown d-flex justify-content-center">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Price
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="?order=asc">Ascending Price</a>
+                            <a class="dropdown-item" href="?order=desc">Descending Price</a>
+                        </div>
+                     </div>
                      <div class="fashion_section_2">
                         <div class="row">
                         {% for urun in urunler %}

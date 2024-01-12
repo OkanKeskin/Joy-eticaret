@@ -50,12 +50,29 @@ def login(request):
     return render(request, 'login.html')
 
 def category_detail(request, id):
-    data = {
-        "id": id,
-        "kategoriler": Category.objects.all(),
-        "kategori_name" : Category.objects.get(id=id).name,
-        "urunler": Product.objects.filter(category_id=id).all,
-    }
+    query = request.GET.get('order')
+    if(query):
+        if(query == "asc"):
+            data = {
+                "id": id,
+                "kategoriler": Category.objects.all(),
+                "kategori_name" : Category.objects.get(id=id).name,
+                "urunler": Product.objects.filter(category_id=id).all().order_by('price'),
+            }
+        else:
+            data = {
+                "id": id,
+                "kategoriler": Category.objects.all(),
+                "kategori_name" : Category.objects.get(id=id).name,
+                "urunler": Product.objects.filter(category_id=id).all().order_by('-price'),
+            }
+    else:
+        data = {
+            "id": id,
+            "kategoriler": Category.objects.all(),
+            "kategori_name" : Category.objects.get(id=id).name,
+            "urunler": Product.objects.filter(category_id=id).all(),
+        }
     return render(request, 'category_detail.html', data)
 
 def product_search(request):
