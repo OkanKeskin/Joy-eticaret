@@ -79,7 +79,7 @@
                      </div>
                   </div>
                   <div class="main">
-                     <form method="GET" action="{% url 'productSearch' %}">
+                    <form method="GET" action="{% url 'productSearch' %}">
                         <!-- Another variation with a button -->
                         <div class="input-group">
                            <input type="text" class="form-control" placeholder="Search this product" name="q">
@@ -145,156 +145,41 @@
          <!-- banner section end -->
       </div>
       <!-- banner bg main end -->
-      <!-- fashion section start -->
+
+      <!-- Ürünler Listelenecek-->
       <div class="fashion_section">
-         <div id="main_slider" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                  <div class="container">
-                     <h1 class="fashion_taital">{{kategoriler.0}}</h1>
-                     <div class="fashion_section_2">
-                        <div class="row">
-                        {% for urun in urun_listesi_electronics %}
-                           <div class="col-lg-4 col-sm-4">
-                              <div class="box_main">
-                                 <h4 class="shirt_text">{{urun.name}}</h4>
-                                 <p class="price_text">Price  <span style="color: #262626;">${{urun.price}}</span></p>
-                                 <div class="tshirt_img"><img src="../static/images/{{urun.imageUrl}}"></div>
-                                 <div class="btn_main">
+        <div id="main_slider" class="carousel slide" data-ride="carousel">
+           <div class="carousel-inner">
+              <div class="carousel-item active">
+                 <div class="container">
+                    <h1 class="fashion_taital">{{kategoriler.0}}</h1>
+                    <div class="fashion_section_2">
+                       <div class="row">
+                        {% if results %}
+                            {% for product in results %}
+                            <div class="col-lg-4 col-sm-4">
+                            <div class="box_main">
+                                <h4 class="shirt_text">{{product.name}}</h4>
+                                <p class="price_text">Price  <span style="color: #262626;">${{product.price}}</span></p>
+                                <div class="tshirt_img"><img src="../static/images/{{product.imageUrl}}"></div>
+                                <div class="btn_main">
                                     <div class="buy_bt"><a href="#">Add Cart</a></div>
                                     <div class="seemore_bt"><a href="#">See More</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        {% endfor %}
-                        </div>
-                     </div>
-                  </div>
-               </div>
+                                </div>
+                            </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No results found.</p>
+                        {% endif %} 
+                          </div>
+                    </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-      <!-- fashion section end -->
-      <!-- fashion section start -->
-      <div class="fashion_section">
-         <div id="main_slider" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                  <div class="container">
-                     <h1 class="fashion_taital">{{kategoriler.1}}</h1>
-                     <div class="fashion_section_2">
-                        <div class="row">
-                        {% for urun in urun_listesi_accessories %}
-                           <div class="col-lg-4 col-sm-4">
-                              <div class="box_main">
-                                 <h4 class="shirt_text">{{urun.name}}</h4>
-                                 <p class="price_text">Price  <span style="color: #262626;">${{urun.price}}</span></p>
-                                 <div class="tshirt_img"><img src="../static/images/{{urun.imageUrl}}"></div>
-                                 <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">Add Cart</a></div>
-                                    <div class="seemore_bt"><a href="#">See More</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        {% endfor %}
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- fashion section end -->
-      <!-- fashion section start -->
-      <div class="fashion_section">
-         <div id="main_slider" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                  <div class="container">
-                     <h1 class="fashion_taital">{{kategoriler.2}}</h1>
-                     <div class="fashion_section_2">
-                        <div class="row">
-                        {% for urun in urun_listesi_fashion %}
-                           <div class="col-lg-4 col-sm-4">
-                              <div class="box_main">
-                                 <h4 class="shirt_text">{{urun.name}}</h4>
-                                 <p class="price_text">Price  <span style="color: #262626;">${{urun.price}}</span></p>
-                                 <div class="tshirt_img"><img src="../static/images/{{urun.imageUrl}}"></div>
-                                 <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">Add Cart</a></div>
-                                    <div class="seemore_bt"><a href="#">See More</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        {% endfor %}
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- fashion section end -->
-      <!-- fashion section start -->
-      <div class="fashion_section">
-         <div id="main_slider" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                  <div class="container">
-                     <h1 class="fashion_taital">{{kategoriler.3}}</h1>
-                     <div class="fashion_section_2">
-                        <div class="row">
-                        {% for urun in urun_listesi_stationary %}
-                           <div class="col-lg-4 col-sm-4">
-                              <div class="box_main">
-                                 <h4 class="shirt_text">{{urun.name}}</h4>
-                                 <p class="price_text">Price  <span style="color: #262626;">${{urun.price}}</span></p>
-                                 <div class="tshirt_img"><img src="../static/images/{{urun.imageUrl}}"></div>
-                                 <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">Add Cart</a></div>
-                                    <div class="seemore_bt"><a href="#">See More</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        {% endfor %}
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- fashion section end -->
-      <!-- fashion section start -->
-      <div class="fashion_section">
-         <div id="main_slider" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                  <div class="container">
-                     <h1 class="fashion_taital">{{kategoriler.4}}</h1>
-                     <div class="fashion_section_2">
-                        <div class="row">
-                        {% for urun in urun_listesi_cosmatic %}
-                           <div class="col-lg-4 col-sm-4">
-                              <div class="box_main">
-                                 <h4 class="shirt_text">{{urun.name}}</h4>
-                                 <p class="price_text">Price  <span style="color: #262626;">${{urun.price}}</span></p>
-                                 <div class="tshirt_img"><img src="../static/images/{{urun.imageUrl}}"></div>
-                                 <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">Add Cart</a></div>
-                                    <div class="seemore_bt"><a href="#">See More</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        {% endfor %}
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- fashion section end -->
+        </div>
+    </div>
+    
       
       <!-- footer section start -->
       <div class="footer_section layout_padding">

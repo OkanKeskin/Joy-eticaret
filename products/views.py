@@ -57,3 +57,18 @@ def category_detail(request, id):
         "urunler": Product.objects.filter(category_id=id).all,
     }
     return render(request, 'category_detail.html', data)
+
+def product_search(request):
+    query = request.GET.get('q')
+    results = []
+
+    if query:
+        results = Product.objects.filter(name__icontains=query).all()
+
+    context = {
+        'query': query,
+        'results': results,
+        'kategoriler': Category.objects.all(),
+    }
+
+    return render(request, 'productSearch.html', context)
