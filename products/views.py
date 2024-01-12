@@ -2,6 +2,10 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Cart, Category,Product,User
 
+promo_code = [
+    "ASLI","OKAN","MİRAY"
+]
+
 def home(request):
     if request.session.get('giris') == True:
         data = {
@@ -120,22 +124,40 @@ def kayit(request):
         user.save()
     return redirect('home')
 
+def total_price():
+    total = 0
+    for item in Cart.objects.all():
+        total += item.product.price
+    return total
+
+def code(request):
+    total = total_price()
+    if code in promo_code:
+        total = total * 0.8
+    return redirect('cart')
+
+def cartDelete(request):
+    if request.method == 'GET':
+        id = request.GET.get('id')
+        Cart.objects.filter(product_id=id).delete()
+    return redirect('cart')
+
 def cart(request):
     list = []
     if request.session.get('giris') == True:
-        if request.session.get('cart') != None:
-            for i in request.session.get('cart'):
-                list.append(Product.objects.get(id=i))
         data = {
             "giris" : True,
             "user_name" : request.session.get('user_name'), # "user_name" : "Ahmet
             "kategoriler" : Category.objects.all(),
+            "list" : Cart.objects.all(),
+            "total_price" : total_price(),
         }
-        data["list"] = list
     else:
         data = {
             "giris" : False,
             "kategoriler" : Category.objects.all(),
+            "list" : Cart.objects.all(),
+            "total_price" : total_price(),
         }
         data["list"] = list
     return render(request, 'cart.html', data)
@@ -160,29 +182,8 @@ def logout(request):
     return redirect('home')
 
 def cartAdd(request):
-    id = request.GET.get('id')
-    if request.session.get('giris') == True:
-        if request.session.get('cart') == None:
-            request.session['cart'] = []
-        request.session['cart'].append(id)
-        request.session.modified = True
-        return redirect('cart')
-    else:
-        messages.error(request, 'Lütfen giriş yapınız!')
-    return redirect('cart')
-
-
-def cart_add(request, id):
-    cart = Cart(request)
-    product = get_object_or_404(Product, id=id)
-    cart.add(product=product,
-             quantity=1,
-             override_quantity=False)
+    if request.method == 'GET':
+        id = request.GET.get('id')
+        cart = Cart(product_id=id)
+        cart.save()
     return redirect('home')
-
-def cart_detail(request):
-    cart = Cart(request)
-    context = {
-        'cart': cart
-    }
-    return render(request, 'cart.html', context=context)

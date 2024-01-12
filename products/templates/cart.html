@@ -161,12 +161,6 @@
                   <th class="text-right py-3 px-4" style="width: 100px">
                     Price
                   </th>
-                  <th class="text-center py-3 px-4" style="width: 120px">
-                    Quantity
-                  </th>
-                  <th class="text-right py-3 px-4" style="width: 100px">
-                    Total
-                  </th>
                   <th
                     class="text-center align-middle py-3 px-0"
                     style="width: 40px"
@@ -187,31 +181,21 @@
                   <td class="p-4">
                     <div class="media align-items-center">
                       <img
-                        src="../static/images/{{d.imageUrl}}"
+                        src="../static/images/{{d.product.imageUrl}}"
                         class="d-block ui-w-40 ui-bordered mr-4"
                         alt
                       />
                       <div class="media-body">
-                        <a href="#" class="d-block text-dark">{{d.name}}</a>
+                        <a href="#" class="d-block text-dark">{{d.product.name}}</a>
                       </div>
                     </div>
                   </td>
                   <td class="text-right font-weight-semibold align-middle p-4">
-                    ${{d.price}}
-                  </td>
-                  <td class="align-middle p-4">
-                    <input
-                      type="text"
-                      class="form-control text-center"
-                      value="1"
-                    />
-                  </td>
-                  <td class="text-right font-weight-semibold align-middle p-4">
-                    $5000
+                    ${{d.product.price}}
                   </td>
                   <td class="text-center align-middle px-0">
                     <a
-                      href="#"
+                      href="cartDelete?id={{d.product.id}}"
                       class="shop-tooltip close float-none text-danger"
                       title
                       data-original-title="Remove"
@@ -242,7 +226,7 @@
                 <label class="text-muted font-weight-normal m-0"
                   >Total price</label
                 >
-                <div class="text-large"><strong>$1164.65</strong></div>
+                <div class="text-large"><strong>{{total_price}}</strong></div>
               </div>
             </div>
           </div>
@@ -253,9 +237,9 @@
             >
               Back to shopping
             </button>
-            <button type="button" class="btn btn-lg btn-primary mt-2">
+            <a href="code" class="btn btn-lg btn-primary mt-2">
               Checkout
-            </button>
+            </a>
           </div>
         </div>
       </div>
