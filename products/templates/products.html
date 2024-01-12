@@ -1,0 +1,15 @@
+{% load static %}
+
+<h1>Products</h1>
+
+{% include 'partials/_navbar.html' %}
+
+<ul>
+    {% for kategori in kategoriler %}
+        <li>{{ kategori }}</li>
+    {% endfor %}
+
+    {% for urun in urun_listesi %}
+        <p>{{ urun.film_adi }}</li>
+    {% endfor %}
+</ul>
